@@ -1,0 +1,6 @@
+D:\Work\EasyScrum\Message\bin\Debug\Message.dll
+D:\Work\EasyScrum\Message\bin\Debug\Message.pdb
+D:\Work\EasyScrum\Message\obj\Debug\MessageTube.csproj.CoreCompileInputs.cache
+D:\Work\EasyScrum\Message\obj\Debug\Message.dll
+D:\Work\EasyScrum\Message\obj\Debug\Message.pdb
+D:\Work\EasyScrum\Message\obj\Debug\MessageTube.csprojResolveAssemblyReference.cache

@@ -1,0 +1,67 @@
+﻿  @using Unity
+  @using MessageTube
+
+    @{
+
+        if (ViewBag.MessagesList == null)
+        {
+            ViewBag.MessagesList = UnityConfig.Container.Resolve<IMessageList>();
+        }
+        foreach (var error in ViewData.ModelState.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+        {
+
+            ViewBag.MessagesList.Add(new Message() { Type = MessageEnum.Error, Body = error.ErrorMessage });
+
+        }
+    }
+    @if (ViewBag.MessagesList != null)
+    {
+
+        <div class="alert alert-danger alert-dismissable  @(ViewBag.MessagesList.ErrorMessagesCount == 0 ? "hidden" : "") ">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @foreach (var msg in ViewBag.MessagesList.ErrorMessages)
+            {
+                <strong>@Resource.Error!</strong> @msg.Body
+            }
+           
+
+        </div>
+
+        if (ViewBag.MessagesList.InfoMessages != null)
+        {
+            <div class="alert alert-info alert-dismissable  @(ViewBag.MessagesList.InfoMessagesCount == 0 ? "hidden" : "" ) ">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach (var msg in ViewBag.MessagesList.InfoMessages)
+                {
+                    <strong>@Resource.Info!</strong> @msg.Body;
+                }
+
+            </div>
+        }
+        if (ViewBag.MessagesList.WarnnigMessages != null)
+        {
+
+            <div class="alert alert-warning alert-dismissable  @(ViewBag.MessagesList.WarnnigMessagesCount == 0 ? "hidden" : "" ) ">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach (var msg in ViewBag.MessagesList.WarnnigMessages)
+                {
+                    <strong>@Resource.Warnnig!</strong> @msg.Body;
+                }
+
+            </div>
+        }
+        if (ViewBag.MessagesList.SuccessMessages != null)
+        {
+            <div class="alert alert-success alert-dismissable  @(ViewBag.MessagesList.SuccessMessagesCount == 0 ? "hidden" : "") ?  ">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach (var msg in ViewBag.MessagesList.SuccessMessages)
+                {
+                    <strong>@Resource.Success!</strong> @msg.Body;
+                }
+
+            </div>
+        }
+
+    }
+
+

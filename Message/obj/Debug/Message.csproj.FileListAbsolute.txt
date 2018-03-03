@@ -1,0 +1,4 @@
+D:\Work\EasyScrum\Message\bin\Debug\Message.dll
+D:\Work\EasyScrum\Message\bin\Debug\Message.pdb
+D:\Work\EasyScrum\Message\obj\Debug\Message.dll
+D:\Work\EasyScrum\Message\obj\Debug\Message.pdb

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageTube", "..\EasyScrum\Message\MessageTube.csproj", "{FA2238E0-709C-41C4-BAA6-87199798CDC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Model", "Events.Model\Events.Model.csproj", "{4A3715CF-509C-467D-9D95-95D7498E1B29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Repository", "Events.Repository\Events.Repository.csproj", "{FC3819AB-DEA1-4F60-A1DD-9A1AB8D6DFA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Services", "Events.Services\Events.Services.csproj", "{DB87838C-BE65-4109-B8DC-9BB1E4D1D866}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.View", "Events.View\Events.View.csproj", "{05BC3FBD-5D12-4EB3-824B-349A2A1E52C5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DB87838C-BE65-4109-B8DC-9BB1E4D1D866} = {DB87838C-BE65-4109-B8DC-9BB1E4D1D866}
+		{FC3819AB-DEA1-4F60-A1DD-9A1AB8D6DFA8} = {FC3819AB-DEA1-4F60-A1DD-9A1AB8D6DFA8}
+		{4A3715CF-509C-467D-9D95-95D7498E1B29} = {4A3715CF-509C-467D-9D95-95D7498E1B29}
+		{FA2238E0-709C-41C4-BAA6-87199798CDC7} = {FA2238E0-709C-41C4-BAA6-87199798CDC7}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA2238E0-709C-41C4-BAA6-87199798CDC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA2238E0-709C-41C4-BAA6-87199798CDC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA2238E0-709C-41C4-BAA6-87199798CDC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA2238E0-709C-41C4-BAA6-87199798CDC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A3715CF-509C-467D-9D95-95D7498E1B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A3715CF-509C-467D-9D95-95D7498E1B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A3715CF-509C-467D-9D95-95D7498E1B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A3715CF-509C-467D-9D95-95D7498E1B29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3819AB-DEA1-4F60-A1DD-9A1AB8D6DFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3819AB-DEA1-4F60-A1DD-9A1AB8D6DFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3819AB-DEA1-4F60-A1DD-9A1AB8D6DFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3819AB-DEA1-4F60-A1DD-9A1AB8D6DFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB87838C-BE65-4109-B8DC-9BB1E4D1D866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB87838C-BE65-4109-B8DC-9BB1E4D1D866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB87838C-BE65-4109-B8DC-9BB1E4D1D866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB87838C-BE65-4109-B8DC-9BB1E4D1D866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BC3FBD-5D12-4EB3-824B-349A2A1E52C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BC3FBD-5D12-4EB3-824B-349A2A1E52C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BC3FBD-5D12-4EB3-824B-349A2A1E52C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BC3FBD-5D12-4EB3-824B-349A2A1E52C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ADA934A1-1AD9-41D0-96F6-B671F88BCD3A}
+	EndGlobalSection
+EndGlobal

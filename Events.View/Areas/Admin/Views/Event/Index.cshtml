@@ -1,0 +1,196 @@
+﻿@model IEnumerable<Events.Model.Event>
+
+@{
+    ViewBag.Title = "Event";
+}
+
+<h2>Event</h2>
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+<!-- This css is to give a nice big popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 200px;
+        width: 300px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="events" class="table">
+    
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            
+            <th></th>
+        </tr>
+    <tbody id="rows">
+        @Html.Action("GetFromIndex", new { startIndex = 0 })
+    </tbody>
+
+</table>
+<div class="row">
+    <a href="#" id="showMoreBtn"  >Show more</a>
+</div>
+
+<!-- Map dialgo -->
+<div class="modal fade" id="modal-map">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Map</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Title</label>
+                            <div class="col-sm-10">
+                                <label   id="title" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <span  id="description"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="map" style="height: 550px;"></div>
+                    </div>
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+               
+            </div>
+        </div>
+        
+    </div>
+   
+</div>
+
+@section Scripts {
+   <script type="text/javascript">
+       var nextIndex = @ViewBag.NextIndex;
+
+       $('#showMoreBtn').click(
+           function () {
+               
+               $.ajax({
+                   type: "GET",
+                   url: '@Url.Action("GetFromIndex")',
+                   data: { startIndex: nextIndex },
+                   success: function (data) {
+                      
+                       if (data.length > 0) {
+                           nextIndex = nextIndex + 10;
+                           $('#rows').append(data);
+                       }
+                       else {
+                           alert('No More Records to Load')
+                       }
+                   },
+                   error: function () {
+                       alert("Error");
+                   }
+               });
+               return false;
+           }
+       );
+    
+</script>
+     
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAuiKzjHidgsf8o0XxFvhtAPKHNDbelNVw&sensor=true" type="text/javascript"></script>
+
+
+    <section class="scripts">
+
+    <script type="text/javascript">
+
+        $("#modal-map").on('shown.bs.modal', function (e) {
+            var img  = e.relatedTarget;
+
+            var eventObject = JSON.parse(img.getAttribute('data-object'));
+            $('#title').append(eventObject.Title);
+            $('#description').append(img.getAttribute('data-decription')); 
+           
+           initializeMap(eventObject);
+        });
+
+
+    
+        function initializeMap(event) {
+           
+       
+        google.maps.visualRefresh = true;
+        var eventLoc = new google.maps.LatLng(event.GeoLong, event.GeoLat);
+        var mapOptions = {
+            zoom: 14,
+            center: eventLoc,
+            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        google.maps.event.addListener(map, "click", function (e) {
+
+            //lat and lng is available in e object
+            var latLng = e.latLng;
+
+
+        });
+        addMarker(event , map);
+
+
+    }
+
+        function addMarker(item , map)
+        {
+            
+            var marker = new google.maps.Marker({
+                'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+                'map': map,
+                'title': item.Title
+            });
+
+            // Make the marker-pin blue!
+            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+            // put in some information about each json object - in this case, the opening hours.
+            var infowindow = new google.maps.InfoWindow({
+                content: "<div class='infoDiv'><h2>" + item.Title + "</h2>" + "<div><h4>start date: " + item.StartDate + "</h4></div><div><h4>end date:" + item.EndDate + "</h4></div></div>"
+            });
+
+            // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+</section>
+
+
+
+}
+

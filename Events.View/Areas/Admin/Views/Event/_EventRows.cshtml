@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Events.Model.Event>
+@foreach (var item in Model)
+{
+    var GeoLong = !item.Location.IsEmpty() && item.Location.Contains(",") ? item.Location.Substring(0, item.Location.IndexOf(",")) : "";
+    var GeoLat = !item.Location.IsEmpty() && item.Location.Contains(",") ? item.Location.Substring(item.Location.IndexOf(",") + 1) : "";
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        
+        <td>
+            <img src="@item.ImagePath" style="width:200px;height:200px;" data-toggle="modal" data-target="#modal-map" data-decription="@item.Description" 
+                 data-object='{"Id": "@item.Id", "Title": "@item.Title", "StartDate": "@item.StartDate", "EndDate": "@item.EndDate","GeoLong": "@GeoLong", "GeoLat": "@GeoLat"}' />
+
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+   
+}
+@Html.Hidden("NextIndex", (object)ViewBag.NextIndex)
